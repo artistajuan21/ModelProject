@@ -27,9 +27,9 @@ namespace Negocio
             SQLDAO sqlDAO = null;
             try
             {
-                //error
-                //string g = "sss";
-                //Convert.ToInt32(g);
+               // error
+                string g = "sss";
+                Convert.ToInt32(g);
 
                 sqlDAO = new SQLDAO(connection);
                 sqlDAO.openConnection();
@@ -42,8 +42,18 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
-                throw new Exception(Excepciones.getException(ex));                
+                try
+                {
+                    sqlDAO.RollBackTransaccion();
+                }
+                catch (Exception )
+                {                    
+                    
+                }finally{
+                    throw new Exception(Excepciones.getException(ex));  
+                }
+                
+                              
             }
             finally
             {
