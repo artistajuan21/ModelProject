@@ -8,6 +8,6 @@ namespace AccesoDatos
 {
     public  class Class1
     {
-        private int ggs;
+        private int ssggs;
     }
 }
