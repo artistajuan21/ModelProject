@@ -39,7 +39,7 @@ namespace Base
             string pathString = System.IO.Path.Combine(folderName);
             System.IO.Directory.CreateDirectory(pathString);
 
-            System.IO.File.WriteAllText(pathString + nombreArchivo, contenido, UTF8Encoding.UTF8);
+            System.IO.File.AppendAllText(pathString + nombreArchivo, contenido, UTF8Encoding.UTF8);
         }
     }
 }

@@ -27,13 +27,14 @@ namespace Negocio
             SQLDAO sqlDAO = null;
             try
             {
-               // error
-                string g = "sss";
-                Convert.ToInt32(g);
-
                 sqlDAO = new SQLDAO(connection);
                 sqlDAO.openConnection();
                 sqlDAO.BeginTransaccion();
+
+                // error
+                string g = "sss";
+                Convert.ToInt32(g);
+
                 obj.fechaCreacion = System.DateTime.Now;
                 obj.esActivo = true;
                 obj.condicion = 1;
@@ -49,7 +50,7 @@ namespace Negocio
                 catch (Exception )
                 {                    
                     
-                }finally{
+                }finally{                    
                     throw new Exception(Excepciones.getException(ex));  
                 }                
                               
