@@ -1,6 +1,27 @@
 ﻿//---- TablaUno---------
 $(document).ready(function () {
 
+//    $('input[name="txtFecha"]').daterangepicker({
+//        singleDatePicker: true,
+//        showDropdowns: true,
+//        applyClass: 'bg-slate-600',
+//        cancelClass: 'btn-default'
+//    },
+//function (start, end, label) {
+//    var years = moment().diff(start, 'years');
+//    alert("You are " + years + " years old.");
+//});
+    // Accessibility labels
+    $('.pickadate-accessibility').pickadate({
+        labelMonthNext: 'Go to the next month',
+        labelMonthPrev: 'Go to the previous month',
+        labelMonthSelect: 'Pick a month from the dropdown',
+        labelYearSelect: 'Pick a year from the dropdown',
+        selectMonths: true,
+        selectYears: true
+    });
+
+
     function TablaUno() {
         this.id = 0;
         this.nombre = '';
