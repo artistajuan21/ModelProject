@@ -1,0 +1,4 @@
+﻿Fecha: 2015_diciembre_10__10:25:24
+Error: CadenaConexion-conectando: 
+CadenaConexion-conectando: 
+Error en la cadena de Conexion

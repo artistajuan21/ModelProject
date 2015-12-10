@@ -26,7 +26,7 @@ $(document).ready(function () {
     var tablauno = new TablaUno()
    
    tablaunoTableList();
-   tabladosList();
+   //tabladosList();
     function save() {
         tablauno.id = $('#txtId').val();
         tablauno.nombre = $('#txtNombre').val();
@@ -233,7 +233,6 @@ $(document).ready(function () {
 
     });
 
-
 });
 
 //---- TablaUnoList---------
@@ -257,8 +256,7 @@ function tablaunoTableList() {
         url: '/TablaUno/selectAllbyActivo',
         data: { esActivo: true }
     }).done(function (response) {
-        //if (response instanceof Object) {
-        if (1 === 1) {
+        if (response instanceof Object) {       
             html += "<tbody>";
             for (var i = 0; i < response.length; i++) {
                 var tablauno = response[i];
@@ -290,12 +288,15 @@ function tablaunoTableList() {
             html += "</tbody>";
             $("#tblTablaUno").html(html);
         } else if (response === 'empty') {
+            html += "<tbody>";
             html += "<tr>";
             html += "<td>No hay datos</td>";
             html += "</tr>";
             html += "</tbody>";
             $("#tblTablaUno").html(html);
+            console.log('La consulta es vacia');
         } else if (response == 'error') {
+            html += "<tbody>";
             html += "<tr>";
             html += "<td>No hay datos</td>";
             html += "</tr>";
@@ -303,6 +304,7 @@ function tablaunoTableList() {
             $("#tblTablaUno").html(html);
             console.log('Error al realizar la operación');
         } else {
+            html += "<tbody>";
             html += "<tr>";
             html += "<td>No hay datos</td>";
             html += "</tr>";

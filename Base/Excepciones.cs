@@ -30,8 +30,8 @@ namespace Base
 
         private static void SaveLogs(Exception ex) {
             
-            string folderName = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)+"/Logs/"; 
-            string nombreArchivo = "LOGS.txt";
+            string folderName = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)+"/Logs/";
+            string nombreArchivo = "LOGS_"+System.DateTime.Now.ToString("yyyy_MMMM_dd") + ".txt";
 
             string contenido = "Fecha: " + System.DateTime.Now.ToString("yyyy_MMMM_dd__H:mm:ss") + "\r\n";
             contenido += "Error: " + ex.Message + "\r\n";

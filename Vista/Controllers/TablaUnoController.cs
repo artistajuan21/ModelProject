@@ -42,7 +42,8 @@ namespace Vista.Controllers
         {
             try
             {
-                return Json(NTablaUno.Instancia.SelectAll(esActivo), JsonRequestBehavior.DenyGet);
+                List<TablaUno> lista=NTablaUno.Instancia.SelectAll(esActivo);
+                return Json(lista, JsonRequestBehavior.DenyGet);
             }
             catch (Exception ex)
             {

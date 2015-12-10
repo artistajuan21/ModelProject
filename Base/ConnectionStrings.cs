@@ -17,6 +17,10 @@ namespace Base
             {
                 conexion = new SqlConnection();
                 conexion.ConnectionString = ConfigurationManager.AppSettings["conexionBD"];
+                if (conexion.ConnectionString=="")
+                {
+                    throw new Exception("Error en la cadena de Conexion");
+                }
                 return conexion;
             }
             catch (Exception ex)

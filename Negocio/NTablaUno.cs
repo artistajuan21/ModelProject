@@ -31,9 +31,9 @@ namespace Negocio
                 sqlDAO.openConnection();
                 sqlDAO.BeginTransaccion();
 
-                // error
-                string g = "sss";
-                Convert.ToInt32(g);
+                //// error
+                //string g = "sss";
+                //Convert.ToInt32(g);
 
                 obj.fechaCreacion = System.DateTime.Now;
                 obj.esActivo = true;
@@ -127,8 +127,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
-                throw new Exception(Excepciones.getException(ex));
+              throw new Exception(Excepciones.getException(ex));
             }
             finally
             {
