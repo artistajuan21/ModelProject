@@ -530,7 +530,7 @@
     <Content Include="assets\js\charts\google\pies\pie_rotate.js" />
     <Content Include="assets\js\charts\google\scatter\scatter.js" />
     <Content Include="assets\js\charts\google\scatter\scatter_diff.js" />
-    <Content Include="assets\js\combojs.js" />
+    <Content Include="assets\js\custom\combojs.js" />
     <Content Include="assets\js\core\app.js" />
     <Content Include="assets\js\core\app.min.js" />
     <Content Include="assets\js\core\libraries\bootstrap.min.js" />
@@ -896,6 +896,7 @@
     <Content Include="assets\js\core\libraries\jquery_ui\interactions.min.js" />
     <Content Include="assets\js\core\libraries\jquery_ui\touch.min.js" />
     <Content Include="assets\js\core\libraries\jquery_ui\widgets.min.js" />
+    <Content Include="assets\js\custom\form_validation.js" />
     <Content Include="assets\js\maps\google\basic\basic.js" />
     <Content Include="assets\js\maps\google\basic\click_event.js" />
     <Content Include="assets\js\maps\google\basic\coordinates.js" />
@@ -2117,9 +2118,9 @@
     <Content Include="assets\js\plugins\visualization\echarts\echarts.js" />
     <Content Include="assets\js\plugins\visualization\echarts\theme\limitless.js" />
     <Content Include="assets\js\plugins\visualization\sparkline.min.js" />
-    <Content Include="assets\js\RegexPatterns.js" />
-    <Content Include="assets\js\TablaDos.js" />
-    <Content Include="assets\js\TablaUno.js" />
+    <Content Include="assets\js\custom\RegexPatterns.js" />
+    <Content Include="assets\js\custom\TablaDos.js" />
+    <Content Include="assets\js\custom\TablaUno.js" />
     <Content Include="assets\swf\datatables\flashExport.swf" />
     <Content Include="assets\swf\handsontable\zero_clipboard.swf" />
     <Content Include="Content\bootstrap.css" />
@@ -2435,6 +2436,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_MasterIntranet.cshtml" />
     <Content Include="Views\Intranet\Index.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,5 +1,4 @@
 ﻿//---- TablaUno---------
-
 $(document).ready(function () {
 
     function TablaUno() {
@@ -24,9 +23,9 @@ $(document).ready(function () {
     }
 
     var tablauno = new TablaUno()
-   
-   tablaunoTableList();
-   //tabladosList();
+
+    tablaunoTableList();
+    tabladosList();
     function save() {
         tablauno.id = $('#txtId').val();
         tablauno.nombre = $('#txtNombre').val();
@@ -37,10 +36,6 @@ $(document).ready(function () {
         tablauno.hora = $('#txtHora').val();
         tablauno.numero = $('#txtNumero').val();
         tablauno.idTablaDos = $("#ddlTablaDos").val();
-        //tablauno.TablaDos.nombre = "gg";
-        //tablauno.TablaDos.esActivo = true;
-        //tablauno.TablaDos.condicion = 1;
-        //tablauno.TablaDos.fechaCreacion = "02/10/2015";
         var objJson = JSON.stringify(tablauno);
         $.ajax({
             type: 'POST',
@@ -50,14 +45,14 @@ $(document).ready(function () {
             data: objJson
         }).done(function (response) {
             if (response === 'ok') {
-                $('#modal_theme_success').modal('toggle');                
+                $('#modal_theme_success').modal('toggle');
                 $.jGrowl('Se guardaron los datos correctamente', {
                     position: 'bottom-right',
                     header: 'Operación exitosa',
                     theme: 'alert-styled-left alert-arrow-left alert-success border-lg'
                 });
-                resetFields();         
-                tablaunoTableList();                
+                resetFields();
+                tablaunoTableList();
             } else if (response === 'error') {
                 alert('Error al realizar la operación');
             } else {
@@ -68,7 +63,7 @@ $(document).ready(function () {
         });
     }
     function resetFields() {
-        
+
         $('#txtId').val('');
         $('#txtNombre').val('');
         $('#txtUnico').val('');
@@ -88,7 +83,7 @@ $(document).ready(function () {
         $('#txtNumero').prop('disabled', false);
         $('#txtIdtablados').prop('disabled', false);
     }
-    function disableFields() {        
+    function disableFields() {
         $('#btnSave').hide();
         $('#reset').hide();
         $('#txtId').prop('disabled', true);
@@ -126,19 +121,19 @@ $(document).ready(function () {
         $('#txtIdtablados').val(tablauno.idTablaDos);
         $('#modal_theme_success').modal('toggle');
     }
-    
+
     $('#btnSave').click(function () {
         var validator = $("#frmGuardar").validate();
         if (validator.form() == true) {
             save();
         }
     });
-    
+
     $('#btnNew').click(function () {
         resetFields();
         enableFields();
     });
-        
+
     $("#tblTablaUno").on("click", "tbody>tr>td>ul>li>ul>li>a.btnView", function () {
         disableFields();
         var idView = $(this).attr('data-view');
@@ -196,7 +191,7 @@ $(document).ready(function () {
             closeOnCancel: false
         },
        function (isConfirm) {
-           if (isConfirm) {              
+           if (isConfirm) {
                $.ajax({
                    type: 'POST',
                    url: '/TablaUno/disable',
@@ -218,7 +213,7 @@ $(document).ready(function () {
                }).fail(function (jqXHR, textStatus) {
                    alert('Ocurrió un error en el servidor');
                });
-               
+
            }
            else {
                swal({
@@ -256,7 +251,7 @@ function tablaunoTableList() {
         url: '/TablaUno/selectAllbyActivo',
         data: { esActivo: true }
     }).done(function (response) {
-        if (response instanceof Object) {       
+        if (response instanceof Object) {
             html += "<tbody>";
             for (var i = 0; i < response.length; i++) {
                 var tablauno = response[i];
@@ -316,5 +311,4 @@ function tablaunoTableList() {
         alert('Ocurrió un error en el servidor');
     });
 }
-
 //---- TablaUnoList---------
