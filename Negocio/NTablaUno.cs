@@ -51,8 +51,7 @@ namespace Negocio
                     
                 }finally{
                     throw new Exception(Excepciones.getException(ex));  
-                }
-                
+                }                
                               
             }
             finally

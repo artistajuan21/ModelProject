@@ -14,12 +14,12 @@ namespace Base
         {
             string mensaje = string.Empty;
             if (ConfigurationManager.AppSettings["modoApp"].ToString() == "debug"){
-                Excepciones.SaveLogs(ex);                
+                SaveLogs(ex);                
                 return ex.Message.ToString();
             }
                 
             else if (ConfigurationManager.AppSettings["modoApp"].ToString() == "release"){
-                Excepciones.SaveLogs(ex);
+                SaveLogs(ex); 
                 return "error";
             }
                 
