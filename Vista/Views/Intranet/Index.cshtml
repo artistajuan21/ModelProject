@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterIntranet.cshtml";
+}
+
+<!-- Page header -->
+<div class="page-header">
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="index.html"><i class="icon-home2 position-left"></i> Inicio</a></li>
+            <li class="active">Dashboard</li>
+        </ul>
+
+        <ul class="breadcrumb-elements">
+            <li><a href="#"><i class="icon-comment-discussion position-left"></i> Soporte</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-gear position-left"></i>
+                    Opciones
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+                    <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+                    <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+<!-- Content area -->
+<div class="content">
+
+    <!-- Basic datatable -->
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Empleados</h5>     
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><button type="button" id="btnNew" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal_theme_success">NUEVO <i class="icon-plus-circle2 position-right"></i></button></li>
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <table id="tblTablaUno" class="table">
+            
+        </table>
+    </div>
+    <!-- /basic datatable -->
+    <!-- Success modal -->
+    <div id="modal_theme_success" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h6 class="modal-title">Empleado</h6>
+                </div>
+
+                <form id="frmGuardar" class="form-horizontal form-validate-jquery" action="#" method="post">
+                    <div class="modal-body">
+
+                        <fieldset class="content-group">
+                            <input type="hidden" name="txtId" id="txtId" />
+                            <div class="col-md-6">
+                                <!-- Basic text input -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Nombre <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="txtNombre" id="txtNombre" class="form-control" required="required" placeholder="Ingrese el Nombre">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Unico <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="txtUnico" id="txtUnico" class="form-control" required="required" placeholder="Ingrese el Unico">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Fecha <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group">
+                                            <input type="text" name="txtFecha" id="txtFecha" required="required" class="form-control pickadate-accessibility " placeholder="fecha">
+                                            <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Condición <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="txtCondicion" id="txtCondicion" class="form-control" required="required" placeholder="Ingrese la condición">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Hora <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="txtHora" id="txtHora" class="form-control" required="required" placeholder="Ingrese la hora">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Numero <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="txtNumero" id="txtNumero" class="form-control" required="required" placeholder="Ingrese la Numero">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">txtIdtablados <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <select id="ddlTablaDos" name="ddlTablaDos" class="form-control">
+                                            <option value="">--Seleccione--</option>
+                                        </select>                                        
+                                    </div>
+                                </div>
+                                <!-- /basic text input -->
+                            </div>
+                        </fieldset>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button id="reset" type="reset" class="btn btn-danger">Resetear <i class="icon-reload-alt position-right"></i></button>
+                        <button id="btnSave" type="button" class="btn btn-primary">Guardar<i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /success modal -->
+    <!-- Footer -->
+    <div class="footer text-muted">
+        &copy; 2015. <a href="#">Admin HTML</a> by <a href="#" target="_blank">InkaDev Perú</a>
+    </div>
+    <!-- /footer -->
+
+
+		                        
+</div>
+<!-- /content area -->
+
+<script src="@Url.Content("~/assets/js/combojs.js")"></script>
+
+<script src="@Url.Content("~/assets/js/TablaUno.js")"></script>
