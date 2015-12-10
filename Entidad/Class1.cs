@@ -8,5 +8,6 @@ namespace Entidad
 {
     public class Class1
     {
+        //GGWP SUbida natacho
     }
 }
