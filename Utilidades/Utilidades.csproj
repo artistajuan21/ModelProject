@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E8236B74-95BD-4B35-BBB3-797CDAB6337C}</ProjectGuid>
+    <ProjectGuid>{5CE0AC2F-284C-4BE4-BDD1-16E2E5AB57FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Negocio</RootNamespace>
-    <AssemblyName>Negocio</AssemblyName>
+    <RootNamespace>Utilidades</RootNamespace>
+    <AssemblyName>Utilidades</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,27 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NTablaDos.cs" />
-    <Compile Include="NTablaUno.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
-      <Project>{694b5567-c7d3-4992-a013-4fafe66c88a6}</Project>
-      <Name>AccesoDatos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Base\Base.csproj">
-      <Project>{e4e7f4b0-a3db-47c3-a450-6050c04ca66b}</Project>
-      <Name>Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entidad\Entidad.csproj">
-      <Project>{ed2ff11a-42b5-47fd-b4a2-999defe90105}</Project>
-      <Name>Entidad</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilidades\Utilidades.csproj">
-      <Project>{5ce0ac2f-284c-4be4-bdd1-16e2e5ab57fa}</Project>
-      <Name>Utilidades</Name>
-    </ProjectReference>
+    <Compile Include="ZonaHoraria.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

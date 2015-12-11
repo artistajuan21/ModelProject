@@ -896,6 +896,7 @@
     <Content Include="assets\js\core\libraries\jquery_ui\interactions.min.js" />
     <Content Include="assets\js\core\libraries\jquery_ui\touch.min.js" />
     <Content Include="assets\js\core\libraries\jquery_ui\widgets.min.js" />
+    <Content Include="assets\js\custom\custom.js" />
     <Content Include="assets\js\custom\form_validation.js" />
     <Content Include="assets\js\maps\google\basic\basic.js" />
     <Content Include="assets\js\maps\google\basic\click_event.js" />

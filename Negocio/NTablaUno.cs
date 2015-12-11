@@ -29,15 +29,10 @@ namespace Negocio
             {
                                               
                 sqlDAO = new SQLDAO(connection);
-
-                //// error
-                //string g = "sss";
-                //Convert.ToInt32(g);
-
                 sqlDAO.openConnection();
-                sqlDAO.BeginTransaccion();                
-
-                obj.fechaCreacion = System.DateTime.Now;
+                sqlDAO.BeginTransaccion();
+                obj.fecha = Utilidades.ZonaHoraria.convertFecha(obj.fecha);
+                obj.fechaCreacion = Utilidades.ZonaHoraria.getFechaHora();
                 obj.esActivo = true;
                 obj.condicion = 1;
                 DTablaUno.Instancia(sqlDAO).insert(obj);
@@ -109,7 +104,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
@@ -128,6 +122,13 @@ namespace Negocio
                 sqlDAO = new SQLDAO(connection);
                 sqlDAO.openConnection();
                 lista = DTablaUno.Instancia(sqlDAO).SelectAll(esActivo);
+                 TablaDos obj=null;
+                for (int i = 0; i < lista.Count; i++)
+                {
+                   obj=new TablaDos();
+                    obj=DTablaDos.Instancia(sqlDAO).Select(lista.ElementAt(i).idTablaDos);
+                    lista.ElementAt(i).TablaDos = obj;
+                }
             }
             catch (Exception ex)
             {
@@ -174,7 +175,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
@@ -195,7 +195,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
@@ -216,7 +215,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally

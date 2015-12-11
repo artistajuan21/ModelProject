@@ -1,27 +1,7 @@
 ﻿//---- TablaUno---------
+
 $(document).ready(function () {
-
-//    $('input[name="txtFecha"]').daterangepicker({
-//        singleDatePicker: true,
-//        showDropdowns: true,
-//        applyClass: 'bg-slate-600',
-//        cancelClass: 'btn-default'
-//    },
-//function (start, end, label) {
-//    var years = moment().diff(start, 'years');
-//    alert("You are " + years + " years old.");
-//});
-    // Accessibility labels
-    $('.pickadate-accessibility').pickadate({
-        labelMonthNext: 'Go to the next month',
-        labelMonthPrev: 'Go to the previous month',
-        labelMonthSelect: 'Pick a month from the dropdown',
-        labelYearSelect: 'Pick a year from the dropdown',
-        selectMonths: true,
-        selectYears: true
-    });
-
-
+    var contador = 0;
     function TablaUno() {
         this.id = 0;
         this.nombre = '';
@@ -44,7 +24,6 @@ $(document).ready(function () {
     }
 
     var tablauno = new TablaUno()
-
     tablaunoTableList();
     tabladosList();
     function save() {
@@ -84,7 +63,6 @@ $(document).ready(function () {
         });
     }
     function resetFields() {
-
         $('#txtId').val('');
         $('#txtNombre').val('');
         $('#txtUnico').val('');
@@ -134,25 +112,27 @@ $(document).ready(function () {
         $('#txtId').val(tablauno.id);
         $('#txtNombre').val(tablauno.nombre);
         $('#txtUnico').val(tablauno.unico);
-        $('#txtFechacreacion').val(tablauno.fechaCreacion);
-        $('#txtFecha').val(tablauno.fecha);
+        var $input = $('#txtFecha').pickadate();
+        var picker = $input.pickadate('picker');
+        picker.set('select', eval(fechaParse(tablauno.fecha)));
         $('#txtCondicion').val(tablauno.condicion);
         $('#txtHora').val(tablauno.hora);
         $('#txtNumero').val(tablauno.numero);
         $('#txtIdtablados').val(tablauno.idTablaDos);
         $('#modal_theme_success').modal('toggle');
     }
-
     $('#btnSave').click(function () {
         var validator = $("#frmGuardar").validate();
         if (validator.form() == true) {
             save();
         }
     });
-
     $('#btnNew').click(function () {
         resetFields();
         enableFields();
+    });
+    $('#reload').click(function () {
+        tablaunoTableList();
     });
 
     $("#tblTablaUno").on("click", "tbody>tr>td>ul>li>ul>li>a.btnView", function () {
@@ -234,7 +214,6 @@ $(document).ready(function () {
                }).fail(function (jqXHR, textStatus) {
                    alert('Ocurrió un error en el servidor');
                });
-
            }
            else {
                swal({
@@ -245,91 +224,116 @@ $(document).ready(function () {
                });
            }
        });
-
-
     });
-
+    //---- TablaUnoList---------
+    function tablaunoTableList() {
+        var html = '';
+        html += "<thead>";
+        html += "<tr>";
+        html += "<th>Nombre</th>";
+        html += "<th>Unico</th>";
+        html += "<th>Fecha Creacion</th>";
+        html += "<th>Fecha</th>";
+        html += "<th>Condicion</th>";
+        html += "<th>Hora</th>";
+        html += "<th>Numero</th>";
+        html += "<th>Tabla Dos</th>";
+        html += "<th>Acción</th>";
+        html += "</tr>";
+        html += "</thead>";
+        $.ajax({
+            type: 'POST',
+            url: '/TablaUno/selectAllbyActivo',
+            data: { esActivo: true }
+        }).done(function (response) {
+            if (response instanceof Object) {
+                html += "<tbody>";
+                for (var i = 0; i < response.length; i++) {
+                    var tablauno = response[i];
+                    var fechaString = eval(fechaParse(tablauno.fecha));
+                    var fechaHoraString = eval(fechaParse(tablauno.fechaCreacion));
+                    html += "<tr>";
+                    html += "<td>" + tablauno.nombre + "</td>";
+                    html += "<td>" + tablauno.unico + "</td>";
+                    html += "<td>" + getfechaHoraFormat(fechaHoraString) + "</td>";
+                    html += "<td>" + getfechaFormat(fechaString) + "</td>";
+                    if (tablauno.condicion==0) {                        
+                        html += "<td><span class='label label-success'>Abierto</span></td>"
+                        }
+                    else{
+                        html += "<td><span class='label label-danger'>Cerrado</span></td>"
+                    }
+                    
+                    html += "<td>" + tablauno.nombre + "</td>";
+                    html += "<td>" + tablauno.numero + "</td>";
+                    html += "<td>" + tablauno.TablaDos.nombre + "</td>";
+                    html += "<td class='text-center'>";
+                    html += "<ul class='icons-list'>";
+                    html += "<li class='dropdown'>";
+                    html += "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>";
+                    html += "<i class='icon-menu9'></i>";
+                    html += "</a>";
+                    html += "<ul class='dropdown-menu dropdown-menu-right'>";
+                    html += "<li><a class='btnView' data-view=" + tablauno.id + " ><i class=' icon-search4'></i> Ver </a></li>";
+                    html += "<li><a class='btnEdit' data-view=" + tablauno.id + "><i class='icon-pencil5'></i> Editar </a></li>";
+                    html += "<li><a class='btnDisable' data-view=" + tablauno.id + "><i class='icon-trash'></i> Eliminar </a></li>";
+                    html += "</ul>";
+                    html += "</li>";
+                    html += "</ul>";
+                    html += "</td>";
+                    html += "</tr>";
+                }
+                html += "</tbody>";
+                $("#tblTablaUno").html(html);
+                table = $('#tblTablaUno').DataTable({
+                    destroy: true,
+                    paging: false
+                });
+                table.destroy();
+                $("#tblTablaUno").html(html);
+                $("#tblTablaUno").DataTable({
+                    autoWidth: false,
+                    dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+                    "lengthMenu": [[15, 25, 50], [15, 25, 50]],
+                    language: {
+                        search: '<span>Filtro:</span> _INPUT_',
+                        lengthMenu: '<span>Ver:</span> _MENU_',
+                        paginate: { 'first': 'First', 'last': 'Last', 'next': '→', 'previous': '←' }
+                    }
+                });
+                $('.dataTables_length select').select2({
+                    minimumResultsForSearch: Infinity,
+                    width: 'auto'
+                });
+            } else if (response === 'empty') {
+                html += "<tbody>";
+                html += "<tr>";
+                html += "<td>No hay datos</td>";
+                html += "</tr>";
+                html += "</tbody>";
+                $("#tblTablaUno").html(html);
+                console.log('La consulta es vacia');
+            } else if (response == 'error') {
+                html += "<tbody>";
+                html += "<tr>";
+                html += "<td>No hay datos</td>";
+                html += "</tr>";
+                html += "</tbody>";
+                $("#tblTablaUno").html(html);
+                console.log('Error al realizar la operación');
+            } else {
+                html += "<tbody>";
+                html += "<tr>";
+                html += "<td>No hay datos</td>";
+                html += "</tr>";
+                html += "</tbody>";
+                $("#tblTablaUno").html(html);
+                console.log(response);
+            }
+        }).fail(function (jqXHR, textStatus) {
+            alert('Ocurrió un error en el servidor');
+        });
+    }
+    //---- TablaUnoList---------
 });
 
-//---- TablaUnoList---------
-function tablaunoTableList() {
-    var html = '';
-    html += "<thead>";
-    html += "<tr>";
-    html += "<th>Nombre</th>";
-    html += "<th>Unico</th>";
-    html += "<th>Fecha Creacion</th>";
-    html += "<th>Fecha</th>";
-    html += "<th>Condicion</th>";
-    html += "<th>Hora</th>";
-    html += "<th>Numero</th>";
-    html += "<th>Tabla Dos</th>";
-    html += "<th>Acción</th>";
-    html += "</tr>";
-    html += "</thead>";
-    $.ajax({
-        type: 'POST',
-        url: '/TablaUno/selectAllbyActivo',
-        data: { esActivo: true }
-    }).done(function (response) {
-        if (response instanceof Object) {
-            html += "<tbody>";
-            for (var i = 0; i < response.length; i++) {
-                var tablauno = response[i];
-                html += "<tr>";
-                html += "<td>" + tablauno.nombre + "</td>";
-                html += "<td>" + tablauno.unico + "</td>";
-                html += "<td>" + tablauno.nombre + "</td>";
-                html += "<td>" + tablauno.nombre + "</td>";
-                html += "<td>" + tablauno.condicion + "</td>";
-                html += "<td>" + tablauno.nombre + "</td>";
-                html += "<td>" + tablauno.numero + "</td>";
-                html += "<td>" + tablauno.idTablaDos + "</td>";
-                html += "<td class='text-center'>";
-                html += "<ul class='icons-list'>";
-                html += "<li class='dropdown'>";
-                html += "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>";
-                html += "<i class='icon-menu9'></i>";
-                html += "</a>";
-                html += "<ul class='dropdown-menu dropdown-menu-right'>";
-                html += "<li><a class='btnView' data-view=" + tablauno.id + " ><i class=' icon-search4'></i> Ver </a></li>";
-                html += "<li><a class='btnEdit' data-view=" + tablauno.id + "><i class='icon-pencil5'></i> Editar </a></li>";
-                html += "<li><a class='btnDisable' data-view=" + tablauno.id + "><i class='icon-trash'></i> Eliminar </a></li>";
-                html += "</ul>";
-                html += "</li>";
-                html += "</ul>";
-                html += "</td>";
-                html += "</tr>";
-            }
-            html += "</tbody>";
-            $("#tblTablaUno").html(html);
-        } else if (response === 'empty') {
-            html += "<tbody>";
-            html += "<tr>";
-            html += "<td>No hay datos</td>";
-            html += "</tr>";
-            html += "</tbody>";
-            $("#tblTablaUno").html(html);
-            console.log('La consulta es vacia');
-        } else if (response == 'error') {
-            html += "<tbody>";
-            html += "<tr>";
-            html += "<td>No hay datos</td>";
-            html += "</tr>";
-            html += "</tbody>";
-            $("#tblTablaUno").html(html);
-            console.log('Error al realizar la operación');
-        } else {
-            html += "<tbody>";
-            html += "<tr>";
-            html += "<td>No hay datos</td>";
-            html += "</tr>";
-            html += "</tbody>";
-            $("#tblTablaUno").html(html);
-            console.log(response);
-        }
-    }).fail(function (jqXHR, textStatus) {
-        alert('Ocurrió un error en el servidor');
-    });
-}
-//---- TablaUnoList---------

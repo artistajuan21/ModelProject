@@ -38,18 +38,18 @@
     <!-- Basic datatable -->
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">Empleados</h5>                 
+            <h5 class="panel-title">Empleados</h5>  
+           
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><button type="button" id="btnNew" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal_theme_success">NUEVO <i class="icon-plus-circle2 position-right"></i></button></li>
                     <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    
+                    <li><a id="reload" data-action="reload"></a></li>                    
                 </ul>
             </div>
         </div>
-        <table id="tblTablaUno" class="table">
-            
+        <table id="tblTablaUno" class='table datatable-basic'>
+
         </table>
     </div>
     <!-- /basic datatable -->
@@ -85,7 +85,7 @@
                                     <label class="control-label col-lg-3">Fecha <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
                                         <div class="input-group">
-                                            <input type="text" name="txtFecha" id="txtFecha" required="required" class="form-control pickadate-accessibility " placeholder="fecha" style="z-index:9999999">
+                                            <input type="text" name="txtFecha" id="txtFecha" required="required" class="form-control pickadate-fecha" placeholder="fecha">
                                             <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -141,7 +141,6 @@
 		                        
 </div>
 <!-- /content area -->
-
 <script src="@Url.Content("~/assets/js/custom/combojs.js")"></script>
 
 <script src="@Url.Content("~/assets/js/custom/TablaUno.js")"></script>
