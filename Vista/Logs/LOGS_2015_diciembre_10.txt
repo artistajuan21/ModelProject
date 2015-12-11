@@ -2,3 +2,7 @@
 Error: CadenaConexion-conectando: 
 CadenaConexion-conectando: 
 Error en la cadena de Conexion
+Fecha: 2015_diciembre_10__23:57:21
+Error: La cadena de entrada no tiene el formato correcto.
+Fecha: 2015_diciembre_10__23:59:17
+Error: La cadena de entrada no tiene el formato correcto.

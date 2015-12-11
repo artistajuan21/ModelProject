@@ -27,13 +27,15 @@ namespace Negocio
             SQLDAO sqlDAO = null;
             try
             {
+                                              
                 sqlDAO = new SQLDAO(connection);
-                sqlDAO.openConnection();
-                sqlDAO.BeginTransaccion();
 
                 //// error
                 //string g = "sss";
                 //Convert.ToInt32(g);
+
+                sqlDAO.openConnection();
+                sqlDAO.BeginTransaccion();                
 
                 obj.fechaCreacion = System.DateTime.Now;
                 obj.esActivo = true;
@@ -45,7 +47,8 @@ namespace Negocio
             {
                 try
                 {
-                    sqlDAO.RollBackTransaccion();
+                    if(sqlDAO!=null)
+                        sqlDAO.RollBackTransaccion();
                 }
                 catch (Exception )
                 {                    
@@ -57,7 +60,8 @@ namespace Negocio
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if(sqlDAO!=null)
+                    sqlDAO.closeConnection();
             }
             return true;
         }
