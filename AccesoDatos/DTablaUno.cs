@@ -53,7 +53,8 @@ namespace AccesoDatos
             }
             finally
             {
-                dr.Close();
+                if (dr!=null)
+                    dr.Close();
                 comando.Parameters.Clear();
             }
             return id;
@@ -128,7 +129,8 @@ namespace AccesoDatos
             }
             finally
             {
-                dr.Close();
+                if(dr!=null)
+                    dr.Close();
                 comando.Parameters.Clear();
             }
             return lista;
@@ -171,7 +173,8 @@ namespace AccesoDatos
             }
             finally
             {
-                dr.Close();
+                if(dr!=null)
+                    dr.Close();
                 comando.Parameters.Clear();
             }
             return lista;
@@ -211,7 +214,8 @@ namespace AccesoDatos
             }
             finally
             {
-                dr.Close();
+                if(dr!=null)
+                    dr.Close();
                 comando.Parameters.Clear();
             }
             return obj;
@@ -252,7 +256,8 @@ namespace AccesoDatos
             }
             finally
             {
-                dr.Close();
+                if(dr!=null)
+                    dr.Close();
                 comando.Parameters.Clear();
             }
             return obj;

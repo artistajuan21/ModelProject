@@ -37,12 +37,24 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
-                throw new Exception(Excepciones.getException(ex));
+                try
+                {
+                    if (sqlDAO != null)
+                        sqlDAO.RollBackTransaccion();
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    throw new Exception(Excepciones.getException(ex));
+                }   
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return true;
         }
@@ -63,12 +75,24 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
-                throw new Exception(Excepciones.getException(ex));
+                try
+                {
+                    if (sqlDAO != null)
+                        sqlDAO.RollBackTransaccion();
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    throw new Exception(Excepciones.getException(ex));
+                }  
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return true;
         }
@@ -85,12 +109,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return lista;
         }
@@ -107,12 +131,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return lista;
         }
@@ -129,12 +153,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return obj;
         }
@@ -151,12 +175,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return obj;
         }
@@ -172,12 +196,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return true;
         }
@@ -193,12 +217,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                sqlDAO.RollBackTransaccion();
                 throw new Exception(Excepciones.getException(ex));
             }
             finally
             {
-                sqlDAO.closeConnection();
+                if (sqlDAO != null)
+                    sqlDAO.closeConnection();
             }
             return true;
         }
