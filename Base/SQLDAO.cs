@@ -29,8 +29,10 @@ namespace Base
 
         public void RollBackTransaccion()
         {
-            if(transaccion!=null)
-                transaccion.Rollback();
+            if (this!=null)            
+                if (transaccion != null)
+                    transaccion.Rollback();
+                   
         }
 
         public SqlCommand obtenerComandoSQL()
@@ -49,8 +51,9 @@ namespace Base
 
         public void closeConnection()
         {
-            if(connection!=null)
-                connection.Close();
+            if (this != null)
+                if (connection != null)
+                    connection.Close();
         }
     }
 }

@@ -44,8 +44,7 @@ namespace Negocio
             {
                 try
                 {
-                    if(sqlDAO!=null)
-                        sqlDAO.RollBackTransaccion();
+                     sqlDAO.RollBackTransaccion();
                 }
                 catch (Exception )
                 {                    
@@ -57,7 +56,6 @@ namespace Negocio
             }
             finally
             {
-                if(sqlDAO!=null)
                     sqlDAO.closeConnection();
             }
             return true;
@@ -86,7 +84,6 @@ namespace Negocio
             {
                 try
                 {
-                    if (sqlDAO != null)
                         sqlDAO.RollBackTransaccion();
                 }
                 catch (Exception)
@@ -100,7 +97,6 @@ namespace Negocio
             }
             finally
             {
-                if (sqlDAO != null)
                     sqlDAO.closeConnection();
             }
             return true;
@@ -122,7 +118,6 @@ namespace Negocio
             }
             finally
             {
-                if (sqlDAO != null)
                     sqlDAO.closeConnection();
             }
             return lista;
@@ -151,7 +146,6 @@ namespace Negocio
             }
             finally
             {
-                if (sqlDAO != null)
                     sqlDAO.closeConnection();
             }
             return lista;
@@ -173,7 +167,6 @@ namespace Negocio
             }
             finally
             {
-                if (sqlDAO != null)
                     sqlDAO.closeConnection();
             }
             return obj;
@@ -195,7 +188,6 @@ namespace Negocio
             }
             finally
             {
-                if (sqlDAO != null)
                     sqlDAO.closeConnection();
             }
             return obj;
@@ -216,7 +208,6 @@ namespace Negocio
             }
             finally
             {
-                if (sqlDAO != null)
                     sqlDAO.closeConnection();
             }
             return true;
@@ -237,7 +228,6 @@ namespace Negocio
             }
             finally
             {
-                if (sqlDAO != null)
                     sqlDAO.closeConnection();
             }
             return true;
