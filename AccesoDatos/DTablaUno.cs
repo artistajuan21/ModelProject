@@ -309,5 +309,67 @@ namespace AccesoDatos
             }
             return true;
         }
+
+        public List<TablaUno> SelectAllForDataTable(int start, int length,string searchValue,string orderByClause,string whereClause)
+        {
+            String query = string.Empty;
+            SqlCommand comando = null;
+            SqlDataReader dr = null;
+            List<TablaUno> lista = null;
+            try
+            {
+                lista = new List<TablaUno>();
+                query = "SELECT * FROM ( SELECT ROW_NUMBER() OVER (" + orderByClause + ") AS RowNumber " +
+                    ",* FROM ( SELECT ( SELECT COUNT(*) FROM TablaUno n " + whereClause + " ) AS TotalDisplayRows " +
+                    ", (SELECT COUNT(*) FROM TablaUno  ) AS TotalRows " +
+                    ",n.id  " +
+                    ",n.nombre " +
+                    ",n.unico " +
+                    ",n.fechaCreacion  " +
+                    ",n.fecha  " +
+                    ",n.condicion  " +
+                    ",n.hora  " +
+                    ",n.numero  " +
+                    ",n.idTablaDos  " +
+                    ",n.esActivo  " +
+                    "FROM TablaUno n " + whereClause + " ) RawResults ) " +
+                    "Results WHERE RowNumber BETWEEN @start AND @end";
+                comando = daoSQL.obtenerComandoSQL();
+                comando.CommandText = query;
+                comando.CommandType = CommandType.Text;
+                comando.Parameters.AddWithValue("@start", start);
+                comando.Parameters.AddWithValue("@end", length);
+                dr = comando.ExecuteReader();
+                while (dr.Read())
+                {
+                    TablaUno obj = new TablaUno();
+                    obj.id = Convert.ToInt64(dr["id"]);
+                    obj.nombre = Convert.ToString(dr["nombre"]);
+                    obj.unico = Convert.ToString(dr["unico"]);
+                    obj.fechaCreacion = Convert.ToDateTime(dr["fechaCreacion"]);
+                    obj.fecha = Convert.ToDateTime(dr["fecha"]);
+                    obj.condicion = Convert.ToInt16(dr["condicion"]);
+                    obj.hora = TimeSpan.Parse(dr["hora"].ToString());
+                    obj.numero = Convert.ToInt32(dr["numero"]);
+                    obj.idTablaDos = Convert.ToInt32(dr["idTablaDos"]);
+                    obj.esActivo = Convert.ToBoolean(dr["esActivo"]);
+                    obj.recordsTotal = Convert.ToInt64(dr["TotalRows"]);
+                    obj.recordsFiltered = Convert.ToInt64(dr["TotalDisplayRows"]);
+                    lista.Add(obj);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("DTablaUno-SelectAllForDataTable: \n" + ex.Message.ToString());
+            }
+            finally
+            {
+                if (dr != null)
+                    dr.Close();
+                comando.Parameters.Clear();
+            }
+            return lista;
+        }
+
     }
 }

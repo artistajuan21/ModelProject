@@ -2454,6 +2454,10 @@
       <Project>{e8236b74-95bd-4b35-bbb3-797cdab6337c}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilidades\Utilidades.csproj">
+      <Project>{5ce0ac2f-284c-4be4-bdd1-16e2e5ab57fa}</Project>
+      <Name>Utilidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

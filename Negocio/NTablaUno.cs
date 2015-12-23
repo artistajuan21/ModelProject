@@ -232,5 +232,85 @@ namespace Negocio
             }
             return true;
         }
+
+
+        public List<TablaUno> SelectAllForDataTable(int start,int length,string searchValue,int column,string ordenAscDesc)
+        {
+            SqlConnection connection = null;
+            List<TablaUno> lista = null;
+            SQLDAO sqlDAO = null;
+            try
+            {
+                sqlDAO = new SQLDAO(connection);
+                sqlDAO.openConnection();
+
+                string orderByClause = " Order By ";
+
+                if (!string.IsNullOrEmpty(ordenAscDesc))
+                {
+                    string columna = column.ToString();
+                    columna = columna.Replace("0", ", nombre");
+                    columna = columna.Replace("1", ", unico");
+                    columna = columna.Replace("2", ", fechaCreacion");
+                    columna = columna.Replace("3", ", fecha");
+                    columna = columna.Replace("4", ", condicion");
+                    columna = columna.Replace("5", ", hora");
+                    columna = columna.Replace("6", ", numero");
+                    columna = columna.Replace("7", ", idTablaDos");
+                    columna = columna.Replace("8", ", esActivo");
+                    columna = columna.Remove(0, 1);
+
+                    orderByClause += (ordenAscDesc.Equals("asc") ? columna : columna + " desc ");
+                }
+
+                string whereClause = string.Empty;
+
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    whereClause = " where nombre like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or unico like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or fechaCreacion like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or fecha like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or condicion like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or hora like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or numero like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or idTablaDos like '";
+                    whereClause += searchValue;
+                    whereClause += "%' or esActivo like '";
+                    whereClause += searchValue;
+                    whereClause += "%' ";
+                }    
+
+                lista = DTablaUno.Instancia(sqlDAO).SelectAllForDataTable(start+1,start+length,searchValue,orderByClause,whereClause);
+
+                TablaDos obj = null;
+                for (int i = 0; i < lista.Count; i++)
+                {
+                    obj = new TablaDos();
+                    obj = DTablaDos.Instancia(sqlDAO).Select(lista.ElementAt(i).idTablaDos);
+                    lista.ElementAt(i).TablaDos = obj;
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Excepciones.getException(ex));
+            }
+            finally
+            {
+                sqlDAO.closeConnection();
+            }
+            return lista;
+        }
+
+        
     }
 }

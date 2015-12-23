@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Entidad
 {
-    public class TablaUno
+    public class TablaUno : BaseEntidadDataTable
     {
         public Int64 id { get; set; }
         

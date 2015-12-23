@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using Entidad;
 using Negocio;
+using Utilidades;
+
 namespace Vista.Controllers
 {
     public class TablaUnoController : Controller
@@ -108,6 +110,51 @@ namespace Vista.Controllers
             }
         }
 
+        public JsonResult SelectAllForDataTable(int draw, int start, int length, Dictionary<string, string> search, Dictionary<string, Dictionary<string, string>> order)
+        {
+            #region Parametros del DataTable
+            Dictionary<string, string> orderArray = order["0"];
+
+            int column = Convert.ToInt32(orderArray["column"]);
+            string ordenAscDesc = orderArray["dir"];
+
+            string valSearch = search["value"];
+            #endregion
+            
+            List<TablaUno> lista = NTablaUno.Instancia.SelectAllForDataTable(start, length, valSearch, column, ordenAscDesc);
+
+            JsonFormatDataTable jsonReturn = new JsonFormatDataTable();
+
+            jsonReturn.draw = draw;
+            jsonReturn.recordsTotal = 0;
+            jsonReturn.recordsFiltered = 0;
+
+            if (lista != null && lista.Count() > 0)
+            {
+                jsonReturn.recordsTotal = lista.ElementAt(0).recordsTotal;
+                jsonReturn.recordsFiltered = lista.ElementAt(0).recordsFiltered;
+            }
+
+            foreach (var item in lista)
+            {
+
+                string[] cadena = new string[8];
+
+                cadena[0] = item.nombre;
+                cadena[1] = item.unico;
+                cadena[2] = item.fechaCreacion.ToShortDateString();
+                cadena[3] = item.fecha.ToString();
+                cadena[4] = item.condicion.ToString();
+                cadena[5] = item.hora.ToString();
+                cadena[6] = item.numero.ToString();
+                cadena[7] = item.TablaDos.nombre;
+
+
+                jsonReturn.data.Add(cadena);
+            }
+
+            return Json(jsonReturn, JsonRequestBehavior.AllowGet); 
+        }
      
     }
 }

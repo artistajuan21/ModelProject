@@ -24,7 +24,8 @@ $(document).ready(function () {
     }
 
     var tablauno = new TablaUno()
-    tablaunoTableList();
+    tablaunoTableListDataTable();
+    //tablaunoTableList();
     tabladosList();
     function save() {
         tablauno.id = $('#txtId').val();
@@ -132,7 +133,8 @@ $(document).ready(function () {
         enableFields();
     });
     $('#reload').click(function () {
-        tablaunoTableList();
+        tablaunoTableListDataTable();
+        //tablaunoTableList();
     });
 
     $("#tblTablaUno").on("click", "tbody>tr>td>ul>li>ul>li>a.btnView", function () {
@@ -335,5 +337,73 @@ $(document).ready(function () {
         });
     }
     //---- TablaUnoList---------
+
+    //---- TablaUnoDataTable-ServerSideProcessing-----
+
+    function tablaunoTableListDataTable() {
+
+        var html = '';
+        html += "<thead>";
+        html += "<tr>";
+        html += "<th>Nombre</th>";
+        html += "<th>Unico</th>";
+        html += "<th>Fecha Creacion</th>";
+        html += "<th>Fecha</th>";
+        html += "<th>Condicion</th>";
+        html += "<th>Hora</th>";
+        html += "<th>Numero</th>";
+        html += "<th>Tabla Dos</th>";
+      //  html += "<th>Acción</th>";
+        html += "</tr>";
+        html += "</thead>";
+
+        $("#tblTablaUno").html(html);
+
+
+      /*  $("#tblTablaUno").DataTable({
+            autoWidth: false,
+            dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+            "lengthMenu": [[15, 25, 50], [15, 25, 50]],
+            language: {
+                search: '<span>Filtro:</span> _INPUT_',
+                lengthMenu: '<span>Ver:</span> _MENU_',
+                paginate: { 'first': 'First', 'last': 'Last', 'next': '→', 'previous': '←' }
+            }
+        });*/
+
+        var table = $('#tblTablaUno').dataTable({
+            "language": {
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "sProcessing": "Procesando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "TablaUno/SelectAllForDataTable",
+                "data": function (d) {
+                    "Intranet/Listar"/*,
+                        d.searchValue = $('div.dataTables_filter input').val();    */
+                }
+            }
+        });
+
+    }
+
+    //---- TablaUnoDataTable-ServerSideProcessing-----
 });
 
