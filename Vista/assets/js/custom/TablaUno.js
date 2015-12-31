@@ -353,32 +353,46 @@ $(document).ready(function () {
         html += "<th>Hora</th>";
         html += "<th>Numero</th>";
         html += "<th>Tabla Dos</th>";
-      //  html += "<th>Acción</th>";
+        html += "<th>Acción</th>";
         html += "</tr>";
         html += "</thead>";
 
         $("#tblTablaUno").html(html);
 
 
-      /*  $("#tblTablaUno").DataTable({
-            autoWidth: false,
-            dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
-            "lengthMenu": [[15, 25, 50], [15, 25, 50]],
-            language: {
-                search: '<span>Filtro:</span> _INPUT_',
-                lengthMenu: '<span>Ver:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': '→', 'previous': '←' }
-            }
-        });*/
+        
 
-        var table = $('#tblTablaUno').dataTable({
+        function LoadIcons() {
+
+            var icons="";
+
+            icons += "<ul class='icons-list'>";
+            icons += "<li class='dropdown'>";
+            icons += "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>";
+            icons += "<i class='icon-menu9'></i>";
+            icons += "</a>";
+            icons += "<ul class='dropdown-menu dropdown-menu-right'>";
+            icons += "<li><a class='btnView' data-view=" + tablauno.id + " ><i class=' icon-search4'></i> Ver </a></li>";
+            icons += "<li><a class='btnEdit' data-view=" + tablauno.id + "><i class='icon-pencil5'></i> Editar </a></li>";
+            icons += "<li><a class='btnDisable' data-view=" + tablauno.id + "><i class='icon-trash'></i> Eliminar </a></li>";
+            icons += "</ul>";
+            icons += "</li>";
+            icons += "</ul>";
+
+            return icons;
+        }
+
+
+        var table = $('#tblTablaUno').DataTable({
+            dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+            "lengthMenu": [[10, 25, 50], [10, 25, 50]],
             "language": {
-                "sLengthMenu": "Mostrar _MENU_ registros",
+                lengthMenu: "<span>Ver:</span> _MENU_",
                 "sZeroRecords": "No se encontraron resultados",
                 "sEmptyTable": "Ningún dato disponible en esta tabla",
                 "sInfo": "",
                 "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
+                "sSearch": "<span>Filtro:</span> _INPUT_",
                 "sProcessing": "Procesando...",
                 "oPaginate": {
                     "sFirst": "Primero",
@@ -399,7 +413,33 @@ $(document).ready(function () {
                     "Intranet/Listar"/*,
                         d.searchValue = $('div.dataTables_filter input').val();    */
                 }
-            }
+            },
+            "columns": [
+                { "data": 0 },
+                { "data": 1 },
+                { "data": 2 },
+                { "data": 3 },
+                {
+                    "render": function (data, type, row) {
+                        if (data==1) {
+                            return "<span class='label label-danger'>"+data+"</span>";
+                        }
+                        else {
+                            return "<span class='label label-success'>" + data + "</span>";
+                        }
+
+                    }
+                },
+                { "data": 5 },
+                { "data": 6 },
+                { "data": 7 },
+                {
+                    "class": "text-center",
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": LoadIcons()
+                }
+            ]
         });
 
     }
