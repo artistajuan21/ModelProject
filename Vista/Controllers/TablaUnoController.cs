@@ -140,7 +140,7 @@ namespace Vista.Controllers
 
                 string[] cadena = new string[8];
 
-                cadena[0] = item.nombre;
+                cadena[0] = item.id.ToString();
                 cadena[1] = item.unico;
                 cadena[2] = item.fechaCreacion.ToShortDateString();
                 cadena[3] = item.fecha.ToString();

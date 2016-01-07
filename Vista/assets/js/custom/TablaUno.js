@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
     var contador = 0;
+    var table;
     function TablaUno() {
         this.id = 0;
         this.nombre = '';
@@ -137,9 +138,13 @@ $(document).ready(function () {
         //tablaunoTableList();
     });
 
-    $("#tblTablaUno").on("click", "tbody>tr>td>ul>li>ul>li>a.btnView", function () {
+    $("#tblTablaUno tbody").on("click", "a.btnView", function () {
         disableFields();
-        var idView = $(this).attr('data-view');
+        //var idView = $(this).attr('data-view');
+        var data = table.row($(this).parents('tr')).data();
+        console.log(data);
+
+        var idView = data[0] ;
         $.ajax({
             type: 'POST',
             url: '/TablaUno/select',
@@ -158,8 +163,10 @@ $(document).ready(function () {
             alert('Ocurrió un error en el servidor');
         });
     });
-    $("#tblTablaUno").on("click", "tbody>tr>td>ul>li>ul>li>a.btnEdit", function () {
-        var idView = $(this).attr('data-view');
+    $("#tblTablaUno tbody").on("click", "a.btnEdit", function () {
+        var data = table.row($(this).parents('tr')).data();   
+
+        var idView = data[0];
         $.ajax({
             type: 'POST',
             url: '/TablaUno/select',
@@ -383,7 +390,7 @@ $(document).ready(function () {
         }
 
 
-        var table = $('#tblTablaUno').DataTable({
+        table = $('#tblTablaUno').DataTable({
             dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             "lengthMenu": [[10, 25, 50], [10, 25, 50]],
             "language": {
@@ -446,6 +453,8 @@ $(document).ready(function () {
             minimumResultsForSearch: Infinity,
             width: 'auto'
         });
+
+        
 
     }
 
