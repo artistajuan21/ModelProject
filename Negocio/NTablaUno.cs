@@ -28,8 +28,7 @@ namespace Negocio
             SqlConnection connection = null;
             SQLDAO sqlDAO = null;
             try
-            {
-                                              
+            {                               
                 sqlDAO = new SQLDAO(connection);
                 sqlDAO.openConnection();
                 sqlDAO.BeginTransaccion();
@@ -296,9 +295,7 @@ namespace Negocio
                     obj = new TablaDos();
                     obj = DTablaDos.Instancia(sqlDAO).Select(lista.ElementAt(i).idTablaDos);
                     lista.ElementAt(i).TablaDos = obj;
-                }
-
-                
+                }                
             }
             catch (Exception ex)
             {

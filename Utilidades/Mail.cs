@@ -34,12 +34,14 @@ namespace Utilidades
             msg.Subject = asunto;
             msg.Body = strbody.ToString();
             msg.IsBodyHtml = true;
-            msg.Attachments.Add(new Attachment(ruta.ToString()));
+            if(ruta!=null)
+                msg.Attachments.Add(new Attachment(ruta.ToString()));
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
             client.Credentials = new System.Net.NetworkCredential(email, clave);
             client.Port = 587; // You can use Port 25 if 587 is blocked (mine is!)
-            client.Host = "smtp.office365.com";
+            //Use smtp.office365.com or smtp.gmail.com
+            client.Host = "smtp.gmail.com";
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.EnableSsl = true;
             client.Send(msg);

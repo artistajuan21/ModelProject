@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Utilidades;
 
 namespace Base
 {
@@ -40,6 +41,33 @@ namespace Base
             System.IO.Directory.CreateDirectory(pathString);
 
             System.IO.File.AppendAllText(pathString + nombreArchivo, contenido, UTF8Encoding.UTF8);
+
+            List<string> listaCorreos=new List<string>();
+
+            listaCorreos.Add("juanbenitezlavado@hotmail.com");
+            listaCorreos.Add("julioc_m18@hotmail.com");
+
+            Mail.Instancia.send(GenerarCustomErrorMessage(ex), listaCorreos, null, "Excepcion en la Aplicación", "App_Log"
+                , ConfigurationManager.AppSettings["emailLogs"]
+                , ConfigurationManager.AppSettings["claveEmailLogs"]);
+        }
+
+        private static string GenerarCustomErrorMessage(Exception ex){
+
+            string completeMessage="";            
+            completeMessage += "<table>";
+            completeMessage += "<tr><td>";
+            completeMessage +="Origen: "+ex.Source+"";
+            completeMessage += "</td></tr>";
+            completeMessage += "<tr><td>";
+            completeMessage +="Exception Message: "+ex.Message+"";
+            completeMessage += "</td></tr>";
+            completeMessage += "<tr><td>";
+            completeMessage +="StackTrace: "+ex.StackTrace;
+            completeMessage += "</td></tr>";
+            completeMessage += "</table>";
+
+            return completeMessage;
         }
     }
 }
