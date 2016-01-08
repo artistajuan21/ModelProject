@@ -266,21 +266,21 @@ namespace Negocio
 
                 if (!string.IsNullOrEmpty(searchValue))
                 {
-                    whereClause = " where nombre like '";
+                    whereClause = " where nombre like '%";
                     whereClause += searchValue;
-                    whereClause += "%' or unico like '";
+                    whereClause += "%' or unico like '%";
                     whereClause += searchValue;
-                    whereClause += "%' or fechaCreacion like '";
+                    whereClause += "%' or fechaCreacion like '%";
                     whereClause += searchValue;
-                    whereClause += "%' or fecha like '";
+                    whereClause += "%' or fecha like '%";
                     whereClause += searchValue;
-                    whereClause += "%' or condicion like '";
+                    whereClause += "%' or condicion like '%";
                     whereClause += searchValue;
-                    whereClause += "%' or hora like '";
+                    whereClause += "%' or hora like '%";
                     whereClause += searchValue;
-                    whereClause += "%' or numero like '";
+                    whereClause += "%' or numero like '%";
                     whereClause += searchValue;
-                    whereClause += "%' or idTablaDos like '";
+                    whereClause += "%' or idTablaDos like '%";
                     whereClause += searchValue;
                     whereClause += "%' or esActivo like '";
                     whereClause += searchValue;
