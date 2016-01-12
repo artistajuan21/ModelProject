@@ -140,11 +140,10 @@ $(document).ready(function () {
 
     $("#tblTablaUno tbody").on("click", "a.btnView", function () {
         disableFields();
-        //var idView = $(this).attr('data-view');
-        var data = table.row($(this).parents('tr')).data();
-        console.log(data);
 
-        var idView = data[0] ;
+        var data = table.row($(this).parents('tr')).data();
+        var idView = data[0];
+
         $.ajax({
             type: 'POST',
             url: '/TablaUno/select',
@@ -164,9 +163,10 @@ $(document).ready(function () {
         });
     });
     $("#tblTablaUno tbody").on("click", "a.btnEdit", function () {
-        var data = table.row($(this).parents('tr')).data();   
 
+        var data = table.row($(this).parents('tr')).data();   
         var idView = data[0];
+
         $.ajax({
             type: 'POST',
             url: '/TablaUno/select',
@@ -188,7 +188,7 @@ $(document).ready(function () {
     });
     $("#tblTablaUno").on("click", "tbody>tr>td>ul>li>ul>li>a.btnDisable", function () {
         var idView = $(this).attr('data-view');
-        console.log(idView);
+
         swal({
             title: "Are you sure?",
             text: "You will not be able to recover this imaginary file!",
@@ -365,8 +365,6 @@ $(document).ready(function () {
         html += "</thead>";
 
         $("#tblTablaUno").html(html);
-
-
         
 
         function LoadIcons() {
@@ -379,9 +377,9 @@ $(document).ready(function () {
             icons += "<i class='icon-menu9'></i>";
             icons += "</a>";
             icons += "<ul class='dropdown-menu dropdown-menu-right'>";
-            icons += "<li><a class='btnView' data-view=" + tablauno.id + " ><i class=' icon-search4'></i> Ver </a></li>";
-            icons += "<li><a class='btnEdit' data-view=" + tablauno.id + "><i class='icon-pencil5'></i> Editar </a></li>";
-            icons += "<li><a class='btnDisable' data-view=" + tablauno.id + "><i class='icon-trash'></i> Eliminar </a></li>";
+            icons += "<li><a class='btnView'><i class='icon-search4'></i> Ver </a></li>";
+            icons += "<li><a class='btnEdit'><i class='icon-pencil5'></i> Editar </a></li>";
+            icons += "<li><a class='btnDisable'><i class='icon-trash'></i> Eliminar </a></li>";
             icons += "</ul>";
             icons += "</li>";
             icons += "</ul>";
@@ -417,8 +415,8 @@ $(document).ready(function () {
             "ajax": {
                 "url": "TablaUno/SelectAllForDataTable",
                 "data": function (d) {
-                    "Intranet/Listar"/*,
-                        d.searchValue = $('div.dataTables_filter input').val();    */
+                    //  "Intranet/Listar"/*,
+                    //   d.searchValue = $('div.dataTables_filter input').val();    */
                 }
             },
             "columns": [

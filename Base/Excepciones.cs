@@ -50,6 +50,7 @@ namespace Base
             Mail.Instancia.send(GenerarCustomErrorMessage(ex), listaCorreos, null, "Excepcion en la Aplicación", "App_Log"
                 , ConfigurationManager.AppSettings["emailLogs"]
                 , ConfigurationManager.AppSettings["claveEmailLogs"]);
+
         }
 
         private static string GenerarCustomErrorMessage(Exception ex){
