@@ -452,6 +452,13 @@ $(document).ready(function () {
             width: 'auto'
         });
 
+        $('div.dataTables_filter input').unbind();
+        $('div.dataTables_filter input').bind('keyup', function (e) {
+            if (e.keyCode == 13) {
+                table.search($(this).val()).draw();
+            }
+        })
+
         
 
     }
