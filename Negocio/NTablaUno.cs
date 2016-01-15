@@ -243,6 +243,8 @@ namespace Negocio
                 sqlDAO = new SQLDAO(connection);
                 sqlDAO.openConnection();
 
+                Convert.ToInt32("sdfsdf");
+
                 string orderByClause = " Order By ";
 
                 if (!string.IsNullOrEmpty(ordenAscDesc))

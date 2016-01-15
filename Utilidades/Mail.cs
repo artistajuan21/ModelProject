@@ -20,9 +20,11 @@ namespace Utilidades
         }
         protected Mail() { }
 
-        public bool send(string strbody, List<string> emailList, string ruta, string asunto, string displayName,string email,string clave)
+        public bool send(string strbody, List<string> emailList, string ruta, string asunto, string displayName)
         {
-            ///////////
+            SmtpClient client = new SmtpClient();
+            string from = client.Credentials.GetCredential(client.Host.ToString(), client.Port, client.DeliveryMethod.ToString()).UserName.ToString();
+
             MailMessage msg = new MailMessage();
             int i = 0;
             foreach (var item in emailList)
@@ -30,20 +32,13 @@ namespace Utilidades
                 msg.To.Add(new MailAddress(emailList.ElementAt(i).ToString(), displayName, UTF8Encoding.UTF8));
                 i++;
             }
-            msg.From = new MailAddress(email,displayName);
+            msg.From = new MailAddress(from,displayName);
             msg.Subject = asunto;
             msg.Body = strbody.ToString();
             msg.IsBodyHtml = true;
             if(ruta!=null)
                 msg.Attachments.Add(new Attachment(ruta.ToString()));
-            SmtpClient client = new SmtpClient();
-            client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential(email, clave);
-            client.Port = 587; // You can use Port 25 if 587 is blocked (mine is!)
-            //Use smtp.office365.com or smtp.gmail.com
-            client.Host = "smtp.gmail.com";
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.EnableSsl = true;
+            
             client.Send(msg);
             //-----------------------
             return true;

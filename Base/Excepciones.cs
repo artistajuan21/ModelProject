@@ -45,11 +45,9 @@ namespace Base
             List<string> listaCorreos=new List<string>();
 
             listaCorreos.Add("juanbenitezlavado@hotmail.com");
-            listaCorreos.Add("julioc_m18@hotmail.com");
+            listaCorreos.Add("julioc_18@hotmail.com");
 
-            Mail.Instancia.send(GenerarCustomErrorMessage(ex), listaCorreos, null, "Excepcion en la Aplicación", "App_Log"
-                , ConfigurationManager.AppSettings["emailLogs"]
-                , ConfigurationManager.AppSettings["claveEmailLogs"]);
+            Mail.Instancia.send(GenerarCustomErrorMessage(ex), listaCorreos, null, "Excepcion en la Aplicación", "App_Log");
 
         }
 
